@@ -1,0 +1,27 @@
+---
+#    vars:
+      __httpd_config_file: /etc/httpd/conf/httpd.conf
+      __httpd_config_template: /etc/ansible/playbooks/LAMP/template/httpd.j2
+      __httpd_base_modules: /etc/httpd/conf.modules.d/00-base.conf
+      __httpd_base_modules_template: /etc/ansible/playbooks/LAMP/template/LoadBaseModules.j2
+      __httpd_sysconfig: /etc/sysconfig/httpd
+      __httpd_enable_worker: HTTPD=/usr/sbin/httpd.worker
+      __httpd_daemon: httpd
+      __httpd_port: 80
+      __httpd_log_dir: /var/log/httpd
+      __httpd_socket: /var/lib/httpd/httpd.sock
+      __httpd_pid_file: /var/run/httpd/httpd.pid
+      __httpd_document_root: "/var/www/html"
+      __httpd_server_root: "/etc/httpd"
+      __httpd_server_admin: root@localhost
+      __httpd_AllowOverride: None
+      __httpd_MaxClients: 32
+      __httpd_StartServers: 1
+      __httpd_MinSpareServers: 1
+      __httpd_MaxSpareServers: 3
+      __httpd_MaxRequestsPerChild: 4096
+      __httpd_KeepAlive: 'on'
+      __httpd_KeepAliveTimeout: 30
+      __httpd_HostnameLookups: 'off'
+      __httpd_worker: 'HTTPD=/usr/sbin/httpd.worker'
+      __httpd_ServerName: 'LocalHost'

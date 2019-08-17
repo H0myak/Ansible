@@ -1,0 +1,35 @@
+---
+- name: Start LAMP playbook...
+  hosts: nodes
+#  gather_facts: false
+#  vars_files:
+#    - vars/apache.yml
+
+  tasks:
+    - name: Include Vars...
+      include_vars: vars/apache.yml
+
+    - name: Include Vars...
+      include_vars: vars/iptables.yml
+
+    - name: Set apache facts task...
+      include: tasks/apache_facts.yml 
+
+    - name: Include CentOS install task...
+      include: tasks/centos_install.yml 
+      when: ansible_distribution == "CentOS"
+
+    - name: Include Ubuntu install task... 
+      include: tasks/ubuntu_install.yml
+      when: ansible_distribution == "Ubuntu" or ansible_distribution == "Deian" 
+
+#    - name: Include variables...
+#      include_vars: "{{ item }}"
+#      with_items:
+#     - files:
+#        - "vars/apache.yml"
+#      skip: true
+
+    - name: Include Apache config task... 
+      include: tasks/apache_config.yml
+

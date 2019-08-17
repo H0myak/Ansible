@@ -1,0 +1,9 @@
+---
+- name: install policy core utils...
+  yum: name=policycoreutils-python
+
+- name: Add http port to allow SELINUX...
+  shell: semanage port -a -t http_port_t -p tcp "{{ httpd_port }}"
+  ignore_errors: yes
+
+#Allow port 8445 for httpd: sudo semanage port -a -t http_port_t -p tcp 8445

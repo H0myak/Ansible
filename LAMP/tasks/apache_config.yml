@@ -1,0 +1,54 @@
+---
+- name: Add Apache config to the server...
+  template:
+    src: "{{ httpd_config_template }}"
+    dest: "{{ httpd_config_file }}"
+
+- name: Update Apache base modules files...
+  template:
+    src: "{{ httpd_base_modules_template }}"
+    dest: "{{ httpd_base_modules }}"
+
+- name: Enable http workers on apahe server...
+  lineinfile:
+    path:  "{{ httpd_sysconfig }}"
+    line:  "{{ httpd_worker }}"
+    state: present
+
+- name: Include CentOS install task...
+  include: tasks/apache_selinux.yml
+  when: ansible_distribution == "CentOS"
+
+- name: Enable service httpd, and not touch the state
+  service:
+    name: httpd
+    enabled: yes
+
+- name: Search established rule in iptables...
+  shell: "{{ __iptables_established }}"
+  register: iptables_established
+
+- name: insert rule in iptables...
+  shell: iptables -I INPUT "{{ iptables_established }}" -p tcp -m tcp --dport {{ httpd_port }} -j ACCEPT
+  register: iptables_established
+
+#- debug:
+#  msg: "{{ iptables_established }}"
+
+#- name: Allow new incoming SYN packets on TCP port {{ httpd_port }}...
+#  iptables:
+#    chain: INPUT
+#    protocol: tcp
+#    destination_port: "{{ httpd_port }}"
+#    ctstate: NEW
+#    syn: match
+#    jump: ACCEPT
+#    action: insert
+#    rule_num: 2
+#"{{ iptables_established }}"
+#    comment: Accept new http connections.
+
+- name: Restarted service httpd
+  service:
+    name: httpd
+    state: restarted

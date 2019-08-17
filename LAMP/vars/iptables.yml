@@ -1,0 +1,3 @@
+---
+#    vars:
+      __iptables_established: iptables -L INPUT -nv --line-numbers | grep "ESTABLISHED" | sed 's/ .*//'

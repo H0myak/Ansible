@@ -1,0 +1,102 @@
+---
+    - name: Set fact httpd_config_file...
+      set_fact: httpd_config_file="{{ __httpd_config_file }}"
+      when: httpd_config_file is not defined
+
+    - name: Set fact httpd_config_template...
+      set_fact: httpd_config_template="{{ __httpd_config_template }}"
+      when: httpd_template is not defined
+
+    - name: Set fact httpd_base_modules...
+      set_fact: httpd_base_modules="{{  __httpd_base_modules }}"
+      when: httpd__base_modules is not defined
+
+    - name: Set fact httpd_base_modules_template...
+      set_fact: httpd_base_modules_template="{{  __httpd_base_modules_template }}"
+      when: httpd_base_modules_template is not defined
+
+    - name: Set fact httpd_sysconfig...
+      set_fact: httpd_sysconfig="{{ __httpd_sysconfig }}"
+      when: httpd_sysconfig is not defined
+
+    - name: Set fact httpd_enable_worker...
+      set_fact: httpd_enable_worker="{{ __httpd_enable_worker }}"
+      when: httpd_enable_worker is not defined
+
+    - name: Set fact http_daemon...
+      set_fact: httpd_daemon="{{ __httpd_daemon }}" 
+      when: httpd_daemon is not defined
+
+    - name: Set fact httpd_port...
+      set_fact: httpd_port="{{ __httpd_port }}"
+      when: httpd_port is not defined
+
+    - name: Set fact httpd_log_dir...
+      set_fact: httpd_log_dir="{{ __httpd_log_dir }}" 
+      when: httpd_log_dir is not defined
+
+    - name: Set fact httpd_socket...
+      set_fact: httpd_socket="{{ __httpd_socket }}"
+      when: httpd_socket is not defined
+
+    - name: Set fact httpd_pid_file...
+      set_fact: httpd_pid_file="{{ __httpd_pid_file }}"
+      when: httpd_pid_file is not defined
+
+    - name: Set fact httpd_document_root...
+      set_fact: httpd_document_root="{{ __httpd_document_root }}" 
+      when: httpd_document_root is not defined
+
+    - name: Set fact httpd_server_root...
+      set_fact: httpd_server_root="{{ __httpd_server_root }}"
+      when: httpd_server_root is not defined
+
+    - name: Set fact httpd_server_admin...
+      set_fact: httpd_server_admin="{{ __httpd_server_admin }}"
+      when: httpd_server_admin is not defined
+
+    - name: Set fact httpd_AllowOverride...
+      set_fact: httpd_AllowOverride="{{ __httpd_AllowOverride }}"
+      when: httpd_AllowOverride is not defined
+
+    - name: Set fact httpd_MaxClients...
+      set_fact: httpd_MaxClients="{{ __httpd_MaxClients }}" 
+      when: httpd_MaxClients is not defined
+
+    - name: Set fact httpd_StartServers...
+      set_fact: httpd_StartServers="{{  __httpd_StartServers }}" 
+      when: httpd_StartServers is not defined
+
+    - name: Set fact MinSpareServers...
+      set_fact: httpd_MinSpareServers="{{ __httpd_MinSpareServers }}"
+      when: httpd_MinSpareServers is not defined
+
+    - name: Set fact MaxSpareServers...
+      set_fact: httpd_MaxSpareServers="{{ __httpd_MaxSpareServers }}"
+      when: httpd_MaxSpareServers is not defined
+
+    - name: Set fact MaxRequestsPerChild...
+      set_fact: httpd_MaxRequestsPerChild="{{ __httpd_MaxRequestsPerChild }}"
+      when: httpd_MaxRequestPerChild is not defined
+
+    - name: Set fact KeepAlive...
+      set_fact: httpd_KeepAlive="{{ __httpd_KeepAlive }}"
+      when: httpd_KeepAlive is not defined
+
+    - name: Set fact KeepAliveTimeout...
+      set_fact: httpd_KeepAliveTimeout="{{ __httpd_KeepAliveTimeout }}"
+      when: httpd_KeepAliveTimeout is not defined
+
+    - name: Set fact HostnameLookups...
+      set_fact: httpd_HostnameLookups="{{ __httpd_HostnameLookups }}"
+      when: httpd_HostnameLookups is not defined
+
+    - name: Set fact httpd_worker...
+      set_fact: httpd_worker="{{ __httpd_worker }}"
+      when: httpd_worker is not defined
+
+    - name: Set fact httpd_ServerName...
+      set_fact: httpd_ServerName="{{ __httpd_ServerName }}"
+      when: httpd_ServerName is not defined
+
+
