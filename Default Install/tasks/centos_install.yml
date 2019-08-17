@@ -1,0 +1,20 @@
+---
+#- name: INSTALL and Configure
+#  hosts: nodes
+#  tasks:
+
+   - name: Install MYSQL repo
+     yum: name=http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+#     ignore_errors: yes
+
+
+
+   - name: Install required packages
+     yum: name={{ item }}
+#       stats: latest
+     with_items:
+        - httpd
+        - php
+        - mysql-server
+     ignore_errors: yes
+

@@ -1,0 +1,14 @@
+---
+  - name: Install required packages
+    apt: name={{ item }}
+    #stats: latest
+    with_items:
+       - vim
+       - git
+       - htop
+       - mtr
+       - openssh-server
+       - tree
+       - wget
+       - tcpdump
+    ignore_errors: yes
