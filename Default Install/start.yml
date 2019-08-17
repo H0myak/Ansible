@@ -1,6 +1,7 @@
 ---
 - name: Default node configuration playbook...
   hosts: nodes
+  sudo: yes
 #  gather_facts: false
 #  vars_files:
 #    - vars/apache.yml
