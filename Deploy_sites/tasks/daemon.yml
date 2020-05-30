@@ -6,10 +6,10 @@
 
 - name: Enable service varnish, and not touch the state
   service:
-    name: varnishd
+    name: varnish
     enabled: yes
 
 - name: Restarted varnish service
   service:
-    name: varnishd
-    state: restarted
+    name: varnish
+    state: reloaded 
