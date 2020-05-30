@@ -1,0 +1,16 @@
+---
+- name: Start deploy sites playbook...
+  hosts: nodes
+#  gather_facts: false
+#  vars_files:
+#    - vars/apache.yml
+
+  tasks:
+    - name: Include varnish vars...
+      include_vars: vars/varnish.params.yml
+
+    - name: Set varnish facts task...
+      include: tasks/daemons_facks.yml
+
+    - name: Include varnish config task...
+      include: tasks/daemon.yml

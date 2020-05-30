@@ -1,0 +1,15 @@
+---
+- name: Add varnish config to the server...
+  template:
+    src: templates/varnish.params.j2
+    dest: /etc/varnish/varnish.params
+
+- name: Enable service varnish, and not touch the state
+  service:
+    name: varnishd
+    enabled: yes
+
+- name: Restarted varnish service
+  service:
+    name: varnishd
+    state: restarted

@@ -1,0 +1,64 @@
+---
+    - name: Set fact reload_vcl...
+      set_fact: reload_vcl="{{ __reload_vcl }}"
+      when: reload_vcl is not defined
+
+    - name: Set fact varnish_vcl_conf...
+      set_fact: varnish_vcl_conf="{{ __varnish_vcl_conf }}"
+      when: varnish_vcl_conf is not defined
+
+    - name: Set fact varnish_listen_port...
+      set_fact: varnish_listen_port="{{ __varnish_listen_port }}"
+      when: varnish_listen_port is not defined
+
+    - name: Set fact varnish_listen_address_admin...
+      set_fact: varnish_listen_address_admin="{{ __varnish_listen_address_admin }}"
+      when: varnish_listen_address_admin is not defined
+
+    - name: Set fact varnish_listen_port_admin...
+      set_fact: varnish_listen_port_admin="{{ __varnish_listen_port_admin }}"
+      when: varnish_listen_port_admin is not defined
+
+    - name: Set fact varnish_secret_file...
+      set_fact: varnish_secret_file="{{ __varnish_secret_file }}"
+      when: varnish_secret_file is not defined
+
+    - name: Set fact def_varnish_storage_size...
+      set_fact: def_varnish_storage_size="{{ __def_varnish_storage_size }}"
+      when: def_varnish_storage_size is not defined
+
+    - name: Set fact use_file_storage...
+      set_fact: use_file_storage="{{ __use_file_storage }}"
+      when: use_file_storage is not defined
+
+    - name: Set fact file_storage_name...
+      set_fact: file_storage_name="{{ __file_storage_name }}"
+      when: file_storage_name is not defined
+
+    - name: Set fact file_storage_path...
+      set_fact: file_storage_path="{{ __file_storage_path }}"
+      when: file_storage_path is not defined
+
+    - name: Set fact file_storage_size...
+      set_fact: file_storage_size="{{ __file_storage_size }}"
+      when: file_storage_size is not defined
+
+    - name: Set fact custom_varnish_conf...
+      set_fact: custom_varnish_conf="{{ __custom_varnish_conf }}"
+      when: custom_varnish_conf is not defined
+
+    - name: Set fact thread_pool_min...
+      set_fact: thread_pool_min="{{ __thread_pool_min }}"
+      when: thread_pool_min is not defined
+
+    - name: Set fact thread_pool_max...
+      set_fact: thread_pool_max="{{ __thread_pool_max }}"
+      when: thread_pool_max is not defined
+
+    - name: Set fact thread_pool_timeout...
+      set_fact: thread_pool_timeout="{{ __thread_pool_timeout }}"
+      when: thread_pool_timeout is not defined
+
+    - name: Set fact custom_daemon_opts...
+      set_fact: custom_daemon_opts="{{ __custom_daemon_opts }}"
+      when: custom_daemon_opts is not defined

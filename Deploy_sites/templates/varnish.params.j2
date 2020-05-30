@@ -1,0 +1,27 @@
+---
+  RELOAD_VCL={{ reload_vcl }}
+  VARNISH_VCL_CONF={{ varnish_vcl_conf }}
+  VARNISH_LISTEN_PORT={{ varnish_listen_port }}
+
+  # Admin interface listen address and port
+  VARNISH_ADMIN_LISTEN_ADDRESS={{ varnish_listen_address_admin }}
+  VARNISH_ADMIN_LISTEN_PORT={{ varnish_listen_port_admin }}
+  VARNISH_SECRET_FILE={{ varnish_secret_file }}
+
+  # Backend storage specification, see Storage Types in the varnishd(5)
+  VARNISH_STORAGE="malloc,{{ def_varnish_storage_size }}"
+
+  {% if use_file_storage is sameas true %}
+  VARNISH_STORAGE="{{ file_storage_name }}=file,{{ file_storage_path }},{{ file_storage_size }}"
+  {% endif %}
+
+  # User and group for the varnishd worker processes
+  VARNISH_USER=varnish
+  VARNISH_GROUP=varnish
+
+  {% if custom_varnish_conf is defined %}
+  {{ custom_varnish_conf }}
+  {% endif %}
+
+  # Other options, see the man page varnishd(1)
+  DAEMON_OPTS="-p thread_pool_min={{ thread_pool_min }} -p thread_pool_max={{ thread_pool_max }} -p thread_pool_timeout"{{ thread_pool_timeout }}" {% if custom_daemon_opts is defined %} {{ custom_daemon_opts }}
