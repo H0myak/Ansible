@@ -63,7 +63,7 @@ sub vcl_recv {
 }
 
 sub vcl_backend_response {
-    if (bereq.url ~ "({% for file_format in static_files_format %}{{ file_format }}{% if not loop.last %}|{% endif %}{% endfor %}") {
+    if (bereq.url ~ "({% for file_format in static_files_format %}{{ file_format }}{% if not loop.last %}|{% endif %}{% endfor %})") {
         unset beresp.http.cookie;
         set beresp.http.Cache-Control = "static, max-age={{ cache_ttl }}";
 {% if file_storage_name is defined %}

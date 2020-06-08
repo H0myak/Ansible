@@ -10,8 +10,8 @@
     __file_storage_name: static
     __file_storage_path: /var/lib/varnish/varnish_storage.bin
     __file_storage_size: 512M
-    __custom_varnish_conf:
+#Optional    __custom_varnish_conf:
     __thread_pool_min: 1
     __thread_pool_max: 1
     __thread_pool_timeout: 600
-    __custom_daemon_opts:
+#Optional    __custom_daemon_opts:

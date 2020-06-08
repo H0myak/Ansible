@@ -43,10 +43,6 @@
       set_fact: file_storage_size="{{ __file_storage_size }}"
       when: file_storage_size is not defined
 
-    - name: Set fact custom_varnish_conf...
-      set_fact: custom_varnish_conf="{{ __custom_varnish_conf }}"
-      when: custom_varnish_conf is not defined
-
     - name: Set fact thread_pool_min...
       set_fact: thread_pool_min="{{ __thread_pool_min }}"
       when: thread_pool_min is not defined
@@ -58,7 +54,3 @@
     - name: Set fact thread_pool_timeout...
       set_fact: thread_pool_timeout="{{ __thread_pool_timeout }}"
       when: thread_pool_timeout is not defined
-
-    - name: Set fact custom_daemon_opts...
-      set_fact: custom_daemon_opts="{{ __custom_daemon_opts }}"
-      when: custom_daemon_opts is not defined
