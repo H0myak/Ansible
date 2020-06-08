@@ -1,8 +1,7 @@
 ---
   modules:
-    - var
     - directors
-  probe:
+  probes:
     default_probe:
       name: "backend_healthcheck"
       url: "/"
@@ -10,14 +9,22 @@
       interval: "1s"
       window: "3"
       threshold: "1"
-   backend:
-     server1:
-       name: "server1"
-       host: "127.0.0.1"
-       port: "82"
-       probe: "backend_healthcheck"
-     server2:
-       name: "server2"
-       host: "127.0.0.1"
-       port: "83"
-       probe: "backend_healthcheck"
+  backends:
+    server1:
+      name: "server1"
+      host: "127.0.0.1"
+      port: "82"
+      probe: "backend_healthcheck"
+    server2:
+      name: "server2"
+      host: "127.0.0.1"
+      port: "83"
+      probe: "backend_healthcheck"
+  lb: true
+  lb_sites:
+    lb1:
+      name: "test"
+      units:
+        - "server1"
+        - "server2"
+  unset_user_cookie: true

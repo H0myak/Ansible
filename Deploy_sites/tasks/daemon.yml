@@ -8,8 +8,3 @@
   service:
     name: varnish
     enabled: yes
-
-- name: Restarted varnish service
-  service:
-    name: varnish
-    state: reloaded 

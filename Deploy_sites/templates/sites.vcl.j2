@@ -1,35 +1,49 @@
+# Managed by ansible 
+
 vcl 4.0;
-(% for module in {{ modules }} %)
-import {{ modules.module }};
-(% endfor %)
 
-probe backend_healthcheck {
-    .url = "/";
-    .timeout = 1s;
-    .interval = 1s;
-    .window = 3;
-    .threshold = 1;
+{% for module in  modules  %}
+import {{ module }};
+{% endfor %}
+
+{% for probe in  probes.values() %}
+probe {{ probe.name }} {
+    .url = "{{ probe.url }}";
+    .timeout = {{ probe.timeout }};
+    .interval = {{ probe.interval }};
+    .window = {{ probe.window }};
+    .threshold = {{ probe.threshold }};
 }
+{% endfor %}
 
-backend nginx {
-    .host = "127.0.0.1";
-    .port = "82";
-    .probe = backend_healthcheck;
+{% for backend in  backends.values() %}
+backend {{ backend.name }} {
+    .host = "{{ backend.host }}";
+    .port = "{{ backend.port }}";
+    .probe = {{ backend.probe }};
 }
+{% endfor %}
 
-backend backup1 {
-    .host = "127.0.0.1";
-    .port = "83";
-    .probe = backend_healthcheck;
-}
-
+{% if lb == true %}
 sub vcl_init {
-    new test = directors.round_robin();
-    test.add_backend(nginx);
-    test.add_backend(backup1);
+{% for lb_site in  lb_sites.values() %}
+    new {{ lb_site.name }} = directors.round_robin();
+{% for lb_unit in  lb_site.units %}
+    {{ lb_site.name }}.add_backend({{ lb_unit }});
+{% endfor %}
 }
+{% endfor %}
+{% endif %}
 
 sub vcl_recv {
+{% if unset_user_cookie == true %}
+    if (req.http.cookie ~ "^\s*$") {
+        unset req.http.cookie;
+        }
+{% endif %}
+    unset req.http.X-Forwarded-For;
+    set req.http.X-Forwarded-For = client.ip;
+
 
     if (req.http.host ~ "example.com") {
         if (req.http.cookie ~ "^\s*$") {
@@ -48,7 +62,8 @@ sub vcl_backend_response {
         set beresp.storage_hint = "static";
         set beresp.http.x-storage = "static";
         set beresp.ttl = 5m;
-    if (req.http.Cache-Control ~ "(?i)no-cache") {
+        }
+    if (beresp.http.Cache-Control ~ "(?i)no-cache") {
         set beresp.uncacheable = true;
         }
     set beresp.uncacheable = true;

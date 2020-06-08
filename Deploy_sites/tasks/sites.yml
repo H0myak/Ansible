@@ -1,15 +1,5 @@
 ---
 - name: Add sites config to the server...
   template:
-    src: templates/sites.vcl.j2
+    src: /etc/ansible/deploy/templates/sites.vcl.j2
     dest: /etc/varnish/sites.vcl
-
-- name: Enable service varnish, and not touch the state
-  service:
-    name: varnish
-    enabled: yes
-
-- name: Restarted varnish service
-  service:
-    name: varnish
-    state: reloaded
