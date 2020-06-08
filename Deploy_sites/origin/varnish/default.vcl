@@ -46,7 +46,7 @@ sub vcl_recv {
            return (hash);
            } else {
            return (pass);
-           } 
+           }
     unset req.http.X-Forwarded-For;
     set req.http.X-Forwarded-For = client.ip;
     set req.backend_hint = test.backend();
@@ -69,4 +69,12 @@ sub vcl_deliver {
     unset resp.http.X-Whatever;
     unset resp.http.X-Varnish;
     unset resp.http.Age;
+}
+
+sub vcl_backend_error {
+    if(beresp.status == 503) {
+        set beresp.status = 666;
+        synthetic({"Something going wrong..."});
+    }
+    return (deliver);
 }
