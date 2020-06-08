@@ -1,5 +1,7 @@
 vcl 4.0;
-import directors;
+(% for module in {{ modules }} %)
+import {{ modules.module }};
+(% endfor %)
 
 probe backend_healthcheck {
     .url = "/";
