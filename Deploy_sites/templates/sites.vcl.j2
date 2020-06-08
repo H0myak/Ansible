@@ -36,23 +36,30 @@ sub vcl_init {
 {% endif %}
 
 sub vcl_recv {
-{% if unset_user_cookie == true %}
+{% if enable_ip_header_forward == true %}
+    unset req.http.{{ dst_ip_header }};
+    set req.http.{{ dst_ip_header }} = {{ src_ip_header }};
+{% endif %}
+
+{% if domains is defined %}
+{% for domain in  domains.values() %}
+    if (req.http.host ~ "{{ domain.name }}") {
+{% if domain.unset_user_cookie == true %}
+        if (req.http.cookie ~ "^\s*$") {
+           unset req.http.cookie;
+           }
+{% endif %}
+        set req.backend_hint = {{ domain.backend }};
+    }
+
+{% endfor %}
+{% endif %}
+{% if default_backend.unset_user_cookie == true %}
     if (req.http.cookie ~ "^\s*$") {
         unset req.http.cookie;
         }
 {% endif %}
-    unset req.http.X-Forwarded-For;
-    set req.http.X-Forwarded-For = client.ip;
-
-
-    if (req.http.host ~ "example.com") {
-        if (req.http.cookie ~ "^\s*$") {
-           unset req.http.cookie;
-           }
-    unset req.http.X-Forwarded-For;
-    set req.http.X-Forwarded-For = client.ip;
-    set req.backend_hint = test.backend();
-    }
+    set req.backend_hint = {{ default_backend.backend }};
 }
 
 sub vcl_backend_response {

@@ -28,3 +28,18 @@
         - "server1"
         - "server2"
   unset_user_cookie: true
+  enable_ip_header_forward: true
+  dst_ip_header: "X-Forwarded-For"
+  src_ip_header: "req.http.X-Real-IP"
+  default_backend:
+    unset_user_cookie: true
+    backend: "test.backend()"
+  domains:
+    site1:
+      name: "example.com"
+      unset_user_cookie: true
+      backend: "server1"
+    site2:
+      name: "example2.com"
+      unset_user_cookie: false
+      backend: "server2"
