@@ -1,4 +1,4 @@
-# Managed by ansible 
+# Managed by ansible
 
 vcl 4.0;
 
@@ -63,25 +63,30 @@ sub vcl_recv {
 }
 
 sub vcl_backend_response {
-    if (bereq.url ~ "(7z|avi|bz2|flac|flv|gz|mka|mkv|mov|mp3|mp4|mpeg|png|mpg|ogg|ogm|opus|rar|tar|tgz|tbz|txz|wav|webm|xz|zip)") {
+    if (bereq.url ~ "({% for file_format in static_files_format %}{{ file_format }}{% if not loop.last %}|{% endif %}{% endfor %}") {
         unset beresp.http.cookie;
-        set beresp.http.cache-control = "static, max-age=600";
-        set beresp.storage_hint = "static";
-        set beresp.http.x-storage = "static";
-        set beresp.ttl = 5m;
+        set beresp.http.Cache-Control = "static, max-age={{ cache_ttl }}";
+{% if file_storage_name is defined %}
+        set beresp.storage_hint = "{{ file_storage_name }}";
+        set beresp.http.x-storage = "{{ file_storage_name }}";
+{% endif %}
+        set beresp.ttl = {{ cache_ttl }}s;
         }
     if (beresp.http.Cache-Control ~ "(?i)no-cache") {
         set beresp.uncacheable = true;
         }
+{% if uncacheable_by_default == true %}
     set beresp.uncacheable = true;
+{% endif %}
 }
 
+{% if remove_headers is defined %}
 sub vcl_deliver {
-    unset resp.http.Via;
-    unset resp.http.X-Whatever;
-    unset resp.http.X-Varnish;
-    unset resp.http.Age;
+{% for remove_header in remove_headers %}
+    unset resp.http.{{ remove_header }};
+{% endfor %}
 }
+{% endif %}
 
 sub vcl_backend_error {
 
