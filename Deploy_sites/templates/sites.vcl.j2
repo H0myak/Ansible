@@ -33,9 +33,6 @@ sub vcl_recv {
         if (req.http.cookie ~ "^\s*$") {
            unset req.http.cookie;
            }
-        if (req.http.Cache-Control ~ "(?i)no-cache") {
-           return (pass);
-           }
     unset req.http.X-Forwarded-For;
     set req.http.X-Forwarded-For = client.ip;
     set req.backend_hint = test.backend();
@@ -49,9 +46,10 @@ sub vcl_backend_response {
         set beresp.storage_hint = "static";
         set beresp.http.x-storage = "static";
         set beresp.ttl = 5m;
-        } else {
+    if (req.http.Cache-Control ~ "(?i)no-cache") {
         set beresp.uncacheable = true;
         }
+    set beresp.uncacheable = true;
 }
 
 sub vcl_deliver {
