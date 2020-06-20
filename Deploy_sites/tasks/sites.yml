@@ -3,4 +3,5 @@
   template:
     src: /etc/ansible/deploy/templates/sites.vcl.j2
     dest: /etc/varnish/sites.vcl
+    backup: yes
   register: varnish_conf

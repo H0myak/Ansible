@@ -15,12 +15,12 @@
     - name: Include sites config task...
       include: tasks/sites.yml
 
-    - name: Started varnish service
+    - name: Started varnish service...
       service:
         name: varnish
         state: started
 
-    - name: Reload_varnish
+    - name: Varnish service reloading... (skipping if config files don't change)
       service:
         name: varnish
         state: reloaded
