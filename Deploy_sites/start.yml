@@ -33,5 +33,5 @@
             state: reloaded
           when: varnish_conf.changed
       rescue:
-          - debug:
-            msg: 'I caught an error, can do stuff here to fix it, :-)'
+        - debug:
+          msg: 'I caught an error, can do stuff here to fix it, :-)'
