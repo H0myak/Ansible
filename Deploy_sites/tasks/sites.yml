@@ -5,3 +5,5 @@
     dest: /etc/varnish/sites.vcl
     backup: yes
   register: varnish_conf
+#  notify:                                                                       
+#    - Reload afrer site change

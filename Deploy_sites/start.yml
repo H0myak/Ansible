@@ -15,13 +15,11 @@
     - name: Include sites config task...
       include: tasks/sites.yml
 
-    - name: Varnish service reloading... (skipping if config files don't change)
-      service:
-        name: varnish
-        state: reloaded
-      when: varnish_conf.changed
-
-    - name: Varnish service starting/reloading...
+#  handlers:
+#    - name: Reload afrer site change
+#      debug:
+#        var: hostvars[inventory_hostname]
+    - name: (Re)started varnish service...
       block:
         - name: Started varnish service...
           service:
@@ -31,7 +29,25 @@
           service:
             name: varnish
             state: reloaded
+          when: varnish_conf.changed or varnish_srv.changed
+        - name: Remove varnish.params backup (skipping if backup don't exist) 
+          shell: rm -f "{{ varnish_srv.backup_file }}"
+          when: varnish_srv.changed
+        - name: Remove sites.vcl backup (skipping if backup don't exist)
+          shell: rm -f "{{ varnish_conf.backup_file }}"
           when: varnish_conf.changed
       rescue:
-        - debug:
-          msg: 'I caught an error, can do stuff here to fix it, :-)'
+        - name: Restore varnish.params... (skipping if config file don't change)
+          command: mv -f "{{ varnish_srv.backup_file }}" /etc/varnish/varnish.params
+          when: varnish_srv.changed
+        - name: Restore sites.vcl... (skipping if config file don't change)
+          command: mv -f "{{ varnish_conf.backup_file }}" /etc/varnish/sites.vcl
+          when: varnish_conf.changed
+        - name: Started varnish service...
+          service:
+            name: varnish
+            state: started
+        - name: Reloaded varnish service...
+          service:
+            name: varnish
+            state: reloaded
