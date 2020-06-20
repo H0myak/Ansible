@@ -20,8 +20,8 @@
         name: varnish
         state: started
 
-  handlers:
     - name: Reload_varnish
       service:
         name: varnish
         state: reloaded
+    when: varnish_conf.changed

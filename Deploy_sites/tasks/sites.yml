@@ -3,4 +3,4 @@
   template:
     src: /etc/ansible/deploy/templates/sites.vcl.j2
     dest: /etc/varnish/sites.vcl
-  notify: Reload_varnish
+  register: varnish_conf
