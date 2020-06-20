@@ -1,9 +1,4 @@
 ---
-- name: Backup main config
-  copy:
-    src: /srv/myfiles/foo.conf
-    dest: /etc/foo.conf
-
 - name: Add varnish config to the server...
   template:
     src: templates/varnish.params.j2
