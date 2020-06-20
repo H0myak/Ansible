@@ -27,7 +27,7 @@
       set_fact: def_varnish_storage_size="{{ __def_varnish_storage_size }}"
       when: def_varnish_storage_size is not defined
 
-    - name: Set fact use_file_storage...
+    - name: Set fact notify: Reload_varnishuse_file_storage...
       set_fact: use_file_storage="{{ __use_file_storage }}"
       when: use_file_storage is not defined
 

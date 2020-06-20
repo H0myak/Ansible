@@ -9,8 +9,8 @@
     - name: Include site vars...
       include_vars: vars/sites.yml
 
-    - name: Set varnish facts task...
-      include: tasks/daemon_facts.yml
+#    - name: Set varnish facts task...
+#      include: tasks/daemon_facts.yml
 
     - name: Include varnish config task...
       include: tasks/daemon.yml
@@ -23,8 +23,8 @@
         name: varnish
         state: started
 
-    handlers:
-      - name: Reload_varnish
-        service:
-          name: varnish
-          state: reloaded
+  handlers:
+    - name: Reload_varnish
+      service:
+        name: varnish
+        state: reloaded
