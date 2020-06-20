@@ -24,4 +24,4 @@
       service:
         name: varnish
         state: reloaded
-    when: varnish_conf.changed
+      when: varnish_conf.changed
