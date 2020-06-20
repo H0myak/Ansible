@@ -24,6 +24,7 @@
   lb_sites:
     lb1:
       name: "test"
+      lb_type: "round_robin"
       units:
         - "server1"
         - "server2"

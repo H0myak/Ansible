@@ -5,7 +5,7 @@
     varnish_listen_address_admin: 127.0.0.1
     varnish_listen_port_admin: 6082
     varnish_secret_file: /etc/varnish/secret
-    def_varnish_storage_size: 256M
+    def_varnish_storage_size: 128M
     use_file_storage: true
     file_storage_name: static
     file_storage_path: /var/lib/varnish/varnish_storage.bin
