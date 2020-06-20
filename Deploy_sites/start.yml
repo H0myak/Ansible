@@ -1,4 +1,5 @@
 ---
+- name: Start deploy sites playbook...
   hosts: varnish
 
   tasks:
@@ -13,7 +14,6 @@
 
     - name: Include sites config task...
       include: tasks/sites.yml
-      - name: Start deploy sites playbook...
 
     - name: Varnish service reloading... (skipping if config files don't change)
       service:
