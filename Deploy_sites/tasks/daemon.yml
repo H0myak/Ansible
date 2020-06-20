@@ -3,6 +3,7 @@
   template:
     src: templates/varnish.params.j2
     dest: /etc/varnish/varnish.params
+  notify: Reload_varnish
 
 - name: Enable service varnish, and not touch the state
   service:

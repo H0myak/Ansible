@@ -1,9 +1,6 @@
 ---
 - name: Start deploy sites playbook...
   hosts: varnish
-#  gather_facts: false
-#  vars_files:
-#    - vars/apache.yml
 
   tasks:
     - name: Include varnish vars...
@@ -26,7 +23,8 @@
         name: varnish
         state: started
 
-    - name: Restarted varnish service
-      service:
-        name: varnish
-        state: reloaded
+    handlers:
+      - name: Reload_varnish
+        service:
+          name: varnish
+          state: reloaded
