@@ -1,5 +1,4 @@
 ---
-- name: Start deploy sites playbook...
   hosts: varnish
 
   tasks:
@@ -14,14 +13,25 @@
 
     - name: Include sites config task...
       include: tasks/sites.yml
-
-    - name: Started varnish service...
-      service:
-        name: varnish
-        state: started
+      - name: Start deploy sites playbook...
 
     - name: Varnish service reloading... (skipping if config files don't change)
       service:
         name: varnish
         state: reloaded
       when: varnish_conf.changed
+
+    - name: Varnish service starting/reloading...
+      block:
+      - name: Started varnish service...
+        service:
+          name: varnish
+          state: started
+      - name: Varnish service reloading... (skipping if config files don't change)
+        service:
+          name: varnish
+          state: reloaded
+        when: varnish_conf.changed
+      rescue:
+        - debug:
+          msg: 'I caught an error, can do stuff here to fix it, :-)'
