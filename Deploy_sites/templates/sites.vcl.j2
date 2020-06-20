@@ -27,7 +27,7 @@ backend {{ backend.name }} {
 {% if lb == true %}
 sub vcl_init {
 {% for lb_site in  lb_sites.values() %}
-    new {{ lb_site.name }} = directors.{{ lb_type }}();
+    new {{ lb_site.name }} = directors.{{ lb_site.lb_type }}();
 {% for lb_unit in  lb_site.units %}
     {{ lb_site.name }}.add_backend({{ lb_unit }});
 {% endfor %}
