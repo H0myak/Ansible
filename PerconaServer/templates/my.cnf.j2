@@ -1,12 +1,9 @@
 # Managed by ansible
 
 {% for mem in memory %}
-{% if {{ ansible_memtotal_mb }} > {{ mem }} %}
-{% set ram_total = mem / 2 %}
-{% break %}
-{% endif %}
-
-#test = {{ ram_total }}
+{% if ram_total == 0 %}
+{% if ansible_memtotal_mb > mem %}
+{% set ram_total = mem %}
 
 [client]
 socket = /var/run/mysqld/mysqld.sock
@@ -37,16 +34,16 @@ max_connect_errors = 10000
 query_cache_type = 0
 query_cache_size = 0
 
-tmp_table_size = 32M #512M 1/32 total ram, default 16M
+tmp_table_size = {{ (ram_total / 32)|int }}M #512M 1/32 total ram, default 16M
 read_buffer_size = 128k # default 128k
 thread_cache_size = 9 # The default value is based on the following formula, capped to a limit of 100:8 + (max_connections / 100)
 max_seeks_for_key = 1000
-max_heap_table_size = 16M #1/64 total ram, default 16M
-max_allowed_packet = 16M
-myisam_sort_buffer_size = 32M #256M
-key_buffer_size = 128M # 1/8 of total ram, default
+max_heap_table_size = {{ (ram_total / 64)|int }}M #1/64 total ram, default 16M
+max_allowed_packet = {{ (ram_total / 64)|int }}M
+myisam_sort_buffer_size = {{ (ram_total / 32)|int }}M #256M
+key_buffer_size = {{ (ram_total / 8)|int }}M # 1/8 of total ram, default
 
-innodb_buffer_pool_size = 256M #8      1/4 total ram
+innodb_buffer_pool_size = {{ (ram_total / 4)|int }}M #8      1/4 total ram
 
 innodb_buffer_pool_instances = 2
 innodb_log_file_size = 32M
@@ -99,3 +96,8 @@ table_open_cache = 4096
 log_bin_trust_function_creators = ON
 
 sql-mode = STRICT_ALL_TABLES
+
+{% endif %}
+{% endif %}
+{% endfor %}
+
