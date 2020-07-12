@@ -1,0 +1,9 @@
+---
+- name: Add mysql config to the server...
+  template:
+    src: templates/my.cnf.j2
+    dest: /etc/my.cnf
+    backup: yes
+  register: percona_conf
+#  notify:
+#    - Reload afrer site change

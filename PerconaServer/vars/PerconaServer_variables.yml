@@ -1,0 +1,6 @@
+---
+datadir: '/var/lib/mysql/data'
+tmpdir: '/var/lib/mysql/tmp'
+socket: '/var/run/mysqld/mysqld.sock'
+enable_slow_query_log: 'ON'
+long_query_time: '1'

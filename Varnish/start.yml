@@ -1,5 +1,5 @@
 ---
-- name: Start deploy sites playbook...
+- name: Start Varnish playbook...
   hosts: varnish
 
   tasks:
@@ -30,7 +30,7 @@
             name: varnish
             state: reloaded
           when: varnish_conf.changed or varnish_srv.changed
-        - name: Remove varnish.params backup (skipping if backup don't exist) 
+        - name: Remove varnish.params backup (skipping if backup don't exist)
           shell: rm -f "{{ varnish_srv.backup_file }}"
           when: varnish_srv.changed
         - name: Remove sites.vcl backup (skipping if backup don't exist)

@@ -1,0 +1,101 @@
+# Managed by ansible
+
+{% for mem in memory %}
+{% if {{ ansible_memtotal_mb }} > {{ mem }} %}
+{% set ram_total = mem / 2 %}
+{% break %}
+{% endif %}
+
+#test = {{ ram_total }}
+
+[client]
+socket = /var/run/mysqld/mysqld.sock
+
+[mysql]
+syslog
+user = root
+
+[mysqld_safe]
+syslog
+
+[mysqld]
+datadir = {{ datadir }}
+tmpdir = {{ tmpdir }}
+socket = {{ socket }}
+user = mysql
+
+slow_query_log = {{ enable_slow_query_log }}
+slow_query_log_file = slow.log
+log_slow_rate_limit = 1
+log_slow_verbosity = 'microtime,query_plan,innodb'
+long_query_time = {{ long_query_time }}
+log_error_verbosity = 3
+character-set-server = utf8
+max_connections = 100
+max_connect_errors = 10000
+
+query_cache_type = 0
+query_cache_size = 0
+
+tmp_table_size = 32M #512M 1/32 total ram, default 16M
+read_buffer_size = 128k # default 128k
+thread_cache_size = 9 # The default value is based on the following formula, capped to a limit of 100:8 + (max_connections / 100)
+max_seeks_for_key = 1000
+max_heap_table_size = 16M #1/64 total ram, default 16M
+max_allowed_packet = 16M
+myisam_sort_buffer_size = 32M #256M
+key_buffer_size = 128M # 1/8 of total ram, default
+
+innodb_buffer_pool_size = 256M #8      1/4 total ram
+
+innodb_buffer_pool_instances = 2
+innodb_log_file_size = 32M
+innodb_log_files_in_group = 2
+innodb_log_buffer_size = 16M
+innodb_lock_wait_timeout = 300
+innodb_flush_log_at_trx_commit = 2
+innodb_flush_method = O_DIRECT
+innodb_file_per_table = 1
+innodb_read_io_threads = 8
+innodb_write_io_threads = 8
+innodb_io_capacity = 200
+innodb_thread_concurrency = 0
+innodb_purge_threads = 1
+innodb_stats_on_metadata = 0
+innodb_buffer_pool_dump_at_shutdown = ON
+innodb_buffer_pool_load_at_startup = ON
+userstat = 1
+log_bin_trust_function_creators = 0
+
+# enable GTID mode
+gtid_mode = ON
+enforce_gtid_consistency = ON
+
+# slave configuration
+server-id = 1
+relay-log = test-relay-bin
+relay_log_info_repository = TABLE
+master_info_repository = TABLE
+relay_log_recovery = 1
+
+# master configuration
+binlog_format = ROW
+log-bin = test-bin
+expire_logs_days = 1
+max_binlog_files = 0
+sync_binlog = 1
+auto-increment-offset = 2
+auto-increment-increment = 2
+
+slave_parallel_type = LOGICAL_CLOCK
+slave_parallel_workers = 10
+slave_preserve_commit_order = ON
+#slave_preserve_commit_order = OFF
+#skip-slave-start = 0
+
+skip-federated
+default_storage_engine = InnoDB
+table_open_cache = 4096
+log_bin_trust_function_creators = ON
+
+sql-mode = STRICT_ALL_TABLES

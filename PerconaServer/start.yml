@@ -1,0 +1,24 @@
+---
+- name: Start PerconaServer playbook...
+  hosts: dbservers
+
+  tasks:
+    - name: Include PerconaServer vars...
+      include_vars: vars/PerconaServer_variables.yml
+
+    - name: Include PerconaServer vars...
+      include_vars: vars/memory_table.yml
+
+    - name: Installing PerconaServer...
+      include_vars: tasks/install.yml
+
+    - name: Include PerconaServer config task...
+      include: tasks/configure.yml
+
+#    - name: Include sites config task...
+#      include: tasks/sites.yml
+
+#  handlers:
+#    - name: Reload afrer site change
+#      debug:
+#        var: hostvars[inventory_hostname]
