@@ -17,4 +17,3 @@
         - php
         - mysql-server
      ignore_errors: yes
-
