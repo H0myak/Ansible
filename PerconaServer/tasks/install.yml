@@ -23,7 +23,7 @@
 - name: Install percona server
   yum:
     name: Percona-Server-server-57
-    register: was_install
+#    register: was_install
     state: present
 
 - name: Started mysql server
@@ -31,15 +31,14 @@
     name: mysql
     state: started
 
-- hosts: Updete first start script on remote server
-  tasks:
-    - copy:
-        src: files/basic_config.sh
-        dest: /usr/local/sbin/basic_config.sh
-        owner: root
-        group: root
-        mode: u+rwx,g-rx,o-rx
+- name: Updete first start script on remote server
+  - copy:
+    src: files/basic_config.sh
+    dest: /usr/local/sbin/basic_config.sh
+    owner: root
+    group: root
+    mode: u+rwx,g-rx,o-rx
 
-- name: Execute script basic_config.sh
-  command: /usr/local/sbin/basic_config.sh
-  when: was_install
+#- name: Execute script basic_config.sh
+#  command: /usr/local/sbin/basic_config.sh
+#  when: was_install
