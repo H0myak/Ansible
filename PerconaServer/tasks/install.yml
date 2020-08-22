@@ -32,7 +32,7 @@
     state: started
 
 - name: Updete first start script on remote server
-  - copy:
+  copy:
     src: files/basic_config.sh
     dest: /usr/local/sbin/basic_config.sh
     owner: root
