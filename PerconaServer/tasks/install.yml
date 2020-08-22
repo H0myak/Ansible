@@ -1,1 +1,45 @@
 ---
+- name: Add percona repository
+  yum_repository:
+    name: percona-release-x86_64
+    description: Percona Original release/x86_64 YUM repository
+    file: percona
+    baseurl: http://repo.percona.com/percona/yum/release/$releasever/RPMS/x86_64
+
+- name: Add percona noarch repository
+  yum_repository:
+    name: percona-release-noarch
+    description: Percona Original release/noarch YUM repository
+    file: percona
+    baseurl: http://repo.percona.com/percona/yum/release/$releasever/RPMS/noarch
+
+  - name: Add percona SRPM repository
+    yum_repository:
+      name: percona-release-sources
+      description: Percona Original release/sources YUM repository
+      file: percona
+      baseurl: http://repo.percona.com/percona/yum/release/$releasever/SRPMS
+
+- name: Install percona server
+  yum:
+    name: Percona-Server-server-57
+    register: was_install
+    state: present
+
+- name: Started mysql server
+  service:
+    name: mysql
+    state: started
+
+- hosts: Updete first start script on remote server
+  tasks:
+    - copy:
+        src: files/basic_config.sh
+        dest: /usr/local/sbin/basic_config.sh
+        owner: root
+        group: root
+        mode: u+rwx,g-rx,o-rx
+
+- name: Execute script basic_config.sh
+  command: /usr/local/sbin/basic_config.sh
+  when: was_install
