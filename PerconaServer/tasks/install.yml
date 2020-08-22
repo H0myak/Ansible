@@ -13,12 +13,12 @@
     file: percona
     baseurl: http://repo.percona.com/percona/yum/release/$releasever/RPMS/noarch
 
-  - name: Add percona SRPM repository
-    yum_repository:
-      name: percona-release-sources
-      description: Percona Original release/sources YUM repository
-      file: percona
-      baseurl: http://repo.percona.com/percona/yum/release/$releasever/SRPMS
+- name: Add percona SRPM repository
+  yum_repository:
+    name: percona-release-sources
+    description: Percona Original release/sources YUM repository
+    file: percona
+    baseurl: http://repo.percona.com/percona/yum/release/$releasever/SRPMS
 
 - name: Install percona server
   yum:
