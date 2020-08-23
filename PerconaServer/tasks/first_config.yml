@@ -1,0 +1,10 @@
+---
+- name: Execute script basic_config.sh
+  command: /usr/local/sbin/basic_config.sh
+  when: first_install.changed
+
+- name: Restarted mysql server after install
+  service:
+    name: mysql
+    state: restarted
+  when: first_install.changed
