@@ -24,10 +24,10 @@
   yum:
     name: Percona-Server-server-57
     state: present
-  register: was_install
+  register: first_install
 
 - name: Started mysql server
-  service:ansible yum run script after install
+  service:
     name: mysql
     state: started
 
@@ -41,4 +41,4 @@
 
 - name: Execute script basic_config.sh
   command: /usr/local/sbin/basic_config.sh
-  when: was_install
+  when: first_install.changed
