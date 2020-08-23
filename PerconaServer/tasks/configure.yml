@@ -4,6 +4,9 @@
     src: templates/my.cnf.j2
     dest: /etc/my.cnf
     backup: yes
-  register: percona_conf
-#  notify:
-#    - Reload afrer site change
+
+- name: Restarted mysql server after install
+  service:
+    name: mysql
+    state: restarted
+  when: first_install.changed

@@ -12,6 +12,8 @@ host=$SQL_HOST
 user=$SQL_USER
 password=$TMP_PASSW" > $USER_SQL_CONF
 
+mkdir /var/lib/mysql/data /var/lib/mysql/tmpdir
+
 mysql --connect-expired-password -e "SET GLOBAL validate_password_policy=LOW;"
 mysql --connect-expired-password -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'Temp$TMP_PASSW';"
 sed "s|$TMP_PASSW|Temp$TMP_PASSW|" -i $USER_SQL_CONF
