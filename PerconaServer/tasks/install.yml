@@ -23,11 +23,11 @@
 - name: Install percona server
   yum:
     name: Percona-Server-server-57
-#    register: was_install
     state: present
+  register: was_install
 
 - name: Started mysql server
-  service:
+  service:ansible yum run script after install
     name: mysql
     state: started
 
@@ -39,6 +39,6 @@
     group: root
     mode: u+rwx,g-rx,o-rx
 
-#- name: Execute script basic_config.sh
-#  command: /usr/local/sbin/basic_config.sh
-#  when: was_install
+- name: Execute script basic_config.sh
+  command: /usr/local/sbin/basic_config.sh
+  when: was_install
