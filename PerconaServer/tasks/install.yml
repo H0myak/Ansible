@@ -26,11 +26,6 @@
     state: present
   register: first_install
 
-- name: Started mysql server
-  service:
-    name: mysql
-    state: started
-
 - name: Updete first start script on remote server
   copy:
     src: files/basic_config.sh
@@ -38,7 +33,3 @@
     owner: root
     group: root
     mode: u+rwx,g-rx,o-rx
-
-- name: Execute script basic_config.sh
-  command: /usr/local/sbin/basic_config.sh
-  when: first_install.changed

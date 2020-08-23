@@ -5,8 +5,23 @@
     dest: /etc/my.cnf
     backup: yes
 
-- name: Restarted mysql server after install
+- name: Create a directory if it does not exist
+  file:
+    path: /var/lib/mysql/data
+    state: directory
+    user: mysql
+    group: mysql
+    mode: '0775'
+
+- name: Create a directory if it does not exist
+  file:
+    path: /var/lib/mysql/tmp
+    user: mysql
+    group: mysql
+    state: directory
+    mode: '0775'
+
+- name: Started mysql server
   service:
     name: mysql
-    state: restarted
-  when: first_install.changed
+    state: started
