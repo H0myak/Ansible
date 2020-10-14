@@ -6,8 +6,8 @@
 #    - name: Include defaults vars...
 #      include_vars: vars/PerconaServer_variables.yml
     - name: Generate MySQL server-id
-        shell: hostname -I | sed -e 's/ \+\([a-z0-9]\+\:\)\+[a-z0-9]\+//' | sed -e 's/ /\n/' | grep -v '^$' | tail -1 | awk -F. '{print $3 * 256 + $4}'
-        register: mysql_server_id
+      shell: hostname -I | sed -e 's/ \+\([a-z0-9]\+\:\)\+[a-z0-9]\+//' | sed -e 's/ /\n/' | grep -v '^$' | tail -1 | awk -F. '{print $3 * 256 + $4}'
+      register: mysql_server_id
 
     - name: Include defaults_origin vars...
       include: vars/defaults_origin.yml
