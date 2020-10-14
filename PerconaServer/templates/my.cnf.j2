@@ -1,5 +1,4 @@
 # Managed by ansible
-
 {% for mem in memory %}
 {% if ram_total == 0 %}
 {% if ansible_memtotal_mb > mem %}
@@ -23,46 +22,49 @@ user = mysql
 
 slow_query_log = {{ enable_slow_query_log }}
 slow_query_log_file = slow.log
-log_slow_rate_limit = 1
+log_slow_rate_limit = {{ log_slow_rate_limit }}
 log_slow_verbosity = 'microtime,query_plan,innodb'
 long_query_time = {{ long_query_time }}
-log_error_verbosity = 3
-character-set-server = utf8
-max_connections = 100
-max_connect_errors = 10000
+log_error_verbosity = {{ log_error_verbosity }}
+character-set-server = {{ character-set-server }}
+max_connections = {{ max_connections }}
+max_connect_errors = {{ max_connect_errors }}
 
-query_cache_type = 0
-query_cache_size = 0
+query_cache_type = {{ query_cache_type }}
+query_cache_size = {{ query_cache_size }}
 
-tmp_table_size = {{ (ram_total / 32)|int }}M #512M 1/32 total ram, default 16M
-read_buffer_size = 128k # default 128k
-thread_cache_size = 9 # The default value is based on the following formula, capped to a limit of 100:8 + (max_connections / 100)
-max_seeks_for_key = 1000
-max_heap_table_size = {{ (ram_total / 64)|int }}M #1/64 total ram, default 16M
-max_allowed_packet = {{ (ram_total / 64)|int }}M
-myisam_sort_buffer_size = {{ (ram_total / 32)|int }}M #256M
-key_buffer_size = {{ (ram_total / 8)|int }}M # 1/8 of total ram, default
+{% if innodb_buffer_pool_size is defined %}{{ innodb_buffer_pool_size }}M{% else %}{{ (ram_total / 4)|int }}M{% endif %}
 
-innodb_buffer_pool_size = {{ (ram_total / 4)|int }}M #8      1/4 total ram
 
-innodb_buffer_pool_instances = 2
-innodb_log_file_size = 32M
-innodb_log_files_in_group = 2
-innodb_log_buffer_size = 16M
-innodb_lock_wait_timeout = 300
-innodb_flush_log_at_trx_commit = 2
-innodb_flush_method = O_DIRECT
-innodb_file_per_table = 1
-innodb_read_io_threads = 8
-innodb_write_io_threads = 8
-innodb_io_capacity = 200
-innodb_thread_concurrency = 0
-innodb_purge_threads = 1
-innodb_stats_on_metadata = 0
-innodb_buffer_pool_dump_at_shutdown = ON
-innodb_buffer_pool_load_at_startup = ON
-userstat = 1
-log_bin_trust_function_creators = 0
+tmp_table_size = {% if tmp_table_size is defined %}{{ tmp_table_size }}M{% else %}{{ (ram_total / 32)|int }}M{% endif %}  #1/32 total ram, default 16M
+read_buffer_size = {{ read_buffer_size }}k # default 128k
+thread_cache_size = {{ thread_cache_size }} # The default value is based on the following formula, capped to a limit of 100:8 + (max_connections / 100)
+max_seeks_for_key = {{ max_seeks_for_key }}
+max_heap_table_size = {% if max_heap_table_size is defined %}{{ max_heap_table_size }}M{% else %}{{ (ram_total / 64)|int }}M{% endif %} #1/64 total ram, default 16M
+max_allowed_packet = {% if max_allowed_packet is defined %}{{ max_allowed_packet }}M{% else %}{{ (ram_total / 64)|int }}M{% endif %}
+myisam_sort_buffer_size = {% if myisam_sort_buffer_size is defined %}{{ myisam_sort_buffer_size }}M{% else %}{{ (ram_total / 32)|int }}M{% endif %} #256M
+key_buffer_size = {% if key_buffer_size is defined %}{{ key_buffer_size }}M{% else %}{{ (ram_total / 8)|int }}M{% endif %} # 1/8 of total ram, default
+
+innodb_buffer_pool_size = {% if innodb_buffer_pool_size is defined %}{{ innodb_buffer_pool_size }}M{% else %}{{ (ram_total / 4)|int }}M{% endif %} #8      1/4 total ram
+
+innodb_buffer_pool_instances = {{ innodb_buffer_pool_instances }}
+innodb_log_file_size = {{ innodb_log_file_size }}M
+innodb_log_files_in_group = {{ innodb_log_files_in_group }}
+innodb_log_buffer_size = {{ innodb_log_buffer_size }}M
+innodb_lock_wait_timeout = {{ innodb_lock_wait_timeout }}
+innodb_flush_log_at_trx_commit = {{ innodb_flush_log_at_trx_commit }}
+innodb_flush_method = {{ innodb_flush_method }}
+innodb_file_per_table = {{ innodb_file_per_table }}
+innodb_read_io_threads = {{ innodb_read_io_threads }}
+innodb_write_io_threads = {{ innodb_write_io_threads }}
+innodb_io_capacity = {{ innodb_io_capacity }}
+innodb_thread_concurrency = {{ innodb_thread_concurrency }}
+innodb_purge_threads = {{ innodb_purge_threads }}
+innodb_stats_on_metadata = {{ innodb_stats_on_metadata }}
+innodb_buffer_pool_dump_at_shutdown = {{ innodb_buffer_pool_dump_at_shutdown }}
+innodb_buffer_pool_load_at_startup = {{ innodb_buffer_pool_load_at_startup }}
+userstat = {{ userstat }}
+log_bin_trust_function_creators = {{ log_bin_trust_function_creators }}
 
 # enable GTID mode
 gtid_mode = ON
@@ -100,4 +102,3 @@ sql-mode = STRICT_ALL_TABLES
 {% endif %}
 {% endif %}
 {% endfor %}
-
