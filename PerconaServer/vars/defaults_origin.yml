@@ -1,20 +1,21 @@
 ---
-    - name: Set fact datadir...
-      set_fact: datadir=/var/lib/mysql/data"
-      when: datadir is not defined
 
-    - name: Set fact tmpdir...
-      set_fact: tmpdir="/var/lib/mysql/tmp"
-      when: tmpdir is not defined
+  - name: Set fact datadir...
+    set_fact: datadir="/var/lib/mysql/data"
+    when: datadir is not defined
 
-    - name: Set fact socket...
-      set_fact: socket="/var/run/mysqld/mysqld.sock"
-      when: socket is not defined
+  - name: Set fact tmpdir...
+    set_fact: tmpdir="/var/lib/mysql/tmp"
+    when: tmpdir is not defined
 
-    - name: Set fact enable_slow_query_log...
-      set_fact: enable_slow_query_log="ON"
-      when: enable_slow_query_log is not defined
+  - name: Set fact socket...
+    set_fact: socket="/var/run/mysqld/mysqld.sock"
+    when: socket is not defined
 
-    - name: Set fact long_query_time...
-      set_fact: long_query_time="1"
-      when: long_query_time is not defined
+  - name: Set fact enable_slow_query_log...
+    set_fact: enable_slow_query_log="ON"
+    when: enable_slow_query_log is not defined
+
+  - name: Set fact long_query_time...
+    set_fact: long_query_time="1"
+    when: long_query_time is not defined

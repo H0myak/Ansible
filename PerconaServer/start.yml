@@ -3,8 +3,11 @@
   hosts: dbservers
 
   tasks:
+#    - name: Include defaults vars...
+#      include_vars: vars/PerconaServer_variables.yml
+
     - name: Include defaults_origin vars...
-      include_vars: vars/defaults_origin.yml
+      include: vars/defaults_origin.yml
 
     - name: Include PerconaServer vars...
       include_vars: vars/memory_table.yml
