@@ -19,6 +19,7 @@ datadir = {{ datadir }}
 tmpdir = {{ tmpdir }}
 socket = {{ socket }}
 user = mysql
+bind-address = 0.0.0.0
 
 slow_query_log = {{ enable_slow_query_log }}
 slow_query_log_file = slow.log
@@ -63,12 +64,14 @@ innodb_buffer_pool_load_at_startup = {{ innodb_buffer_pool_load_at_startup }}
 userstat = {{ userstat }}
 log_bin_trust_function_creators = {{ log_bin_trust_function_creators }}
 
+{% if use_gtid is sameas true %}
 # enable GTID mode
 gtid_mode = ON
 enforce_gtid_consistency = ON
+{% endif %}
 
 # slave configuration
-server-id = 1
+server-id = {{ mysql_server_id.stdout }}
 relay-log = test-relay-bin
 relay_log_info_repository = TABLE
 master_info_repository = TABLE
