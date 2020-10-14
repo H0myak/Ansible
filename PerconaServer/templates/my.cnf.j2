@@ -38,7 +38,7 @@ read_buffer_size = {{ read_buffer_size }}k # default 128k
 thread_cache_size = {{ thread_cache_size }} # The default value is based on the following formula, capped to a limit of 100:8 + (max_connections / 100)
 max_seeks_for_key = {{ max_seeks_for_key }}
 max_heap_table_size = {% if max_heap_table_size is defined %}{{ max_heap_table_size }}M{% else %}{{ (ram_total / 64)|int }}M{% endif %} #1/64 total ram, default 16M
-max_allowed_packet = {% if max_allowed_packet is defined %}{{ max_allowed_packet }}M{% else %}{{ (ram_total / 64)|int }}M{% endif %}
+max_allowed_packet = {% if max_allowed_packet is defined %}{{ max_allowed_packet }}M{% else %}{{ (ram_total / 64)|int }}M{% endif %} #1/64 total ram
 myisam_sort_buffer_size = {% if myisam_sort_buffer_size is defined %}{{ myisam_sort_buffer_size }}M{% else %}{{ (ram_total / 32)|int }}M{% endif %} #256M
 key_buffer_size = {% if key_buffer_size is defined %}{{ key_buffer_size }}M{% else %}{{ (ram_total / 8)|int }}M{% endif %} # 1/8 of total ram, default
 
