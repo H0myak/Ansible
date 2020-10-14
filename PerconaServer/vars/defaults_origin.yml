@@ -135,3 +135,75 @@
   - name: Set fact use_gtid...
     set_fact: use_gtid="true"
     when: use_gtid is not defined
+
+  - name: Set fact relay_log...
+    set_fact: relay_log="mysql-relay-bin"
+    when: relay_log is not defined
+
+  - name: Set fact relay_log_info_repository...
+    set_fact: relay_log_info_repository="TABLE"
+    when: relay_log_info_repository is not defined
+
+  - name: Set fact master_info_repository...
+    set_fact: master_info_repository="TABLE"
+    when: master_info_repository is not defined
+
+  - name: Set fact relay_log_recovery...
+    set_fact: relay_log_recovery="1"
+    when: relay_log_recovery is not defined
+
+  - name: Set fact binlog_format...
+    set_fact: binlog_format="ROW"
+    when: binlog_format is not defined
+
+  - name: Set fact log_bin...
+    set_fact: log_bin="master_bin_log"
+    when: log_bin is not defined
+
+  - name: Set fact expire_logs_days...
+    set_fact: expire_logs_days="1"
+    when: expire_logs_days is not defined
+
+  - name: Set fact max_binlog_files...
+    set_fact: max_binlog_files="0"
+    when: max_binlog_files is not defined
+
+  - name: Set fact sync_binlog...
+    set_fact: sync_binlog="0"
+    when: sync_binlog is not defined
+
+  - name: Set fact auto_increment_offset...
+    set_fact: auto_increment_offset="2"
+    when: auto_increment_offset is not defined
+
+  - name: Set fact auto_increment_increment...
+    set_fact: auto_increment_increment="2"
+    when: auto_increment_increment is not defined
+
+  - name: Set fact slave_parallel_type...
+    set_fact: slave_parallel_type="LOGICAL_CLOCK"
+    when: slave_parallel_type is not defined
+
+  - name: Set fact slave_parallel_workers...
+    set_fact: slave_parallel_workers="10"
+    when: slave_parallel_workers is not defined
+
+  - name: Set fact slave_preserve_commit_order...
+    set_fact: slave_preserve_commit_order="ON"
+    when: slave_preserve_commit_order is not defined
+
+  - name: Set fact default_storage_engine...
+    set_fact: default_storage_engine="InnoDB"
+    when: default_storage_engine is not defined
+
+  - name: Set fact table_open_cache...
+    set_fact: table_open_cache="4096"
+    when: table_open_cache is not defined
+
+  - name: Set fact log_bin_trust_function_creators...
+    set_fact: log_bin_trust_function_creators="ON"
+    when: log_bin_trust_function_creators is not defined
+
+  - name: Set fact sql_mode...
+    set_fact: sql_mode="STRICT_ALL_TABLES"
+    when: sql_mode is not defined

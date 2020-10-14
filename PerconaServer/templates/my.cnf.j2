@@ -72,32 +72,30 @@ enforce_gtid_consistency = ON
 
 # slave configuration
 server-id = {{ mysql_server_id.stdout }}
-relay-log = test-relay-bin
-relay_log_info_repository = TABLE
-master_info_repository = TABLE
-relay_log_recovery = 1
+relay-log = {{ relay_log }}
+relay_log_info_repository = {{ relay_log_info_repository }}
+master_info_repository = {{ master_info_repository }}
+relay_log_recovery = {{ relay_log_recovery }}
 
 # master configuration
-binlog_format = ROW
-log-bin = test-bin
-expire_logs_days = 1
-max_binlog_files = 0
-sync_binlog = 1
-auto-increment-offset = 2
-auto-increment-increment = 2
+binlog_format = {{ binlog_format }}
+log-bin = {{ log_bin }}
+expire_logs_days = {{ expire_logs_days }}
+max_binlog_files = {{ max_binlog_files }}
+sync_binlog = {{ sync_binlog }}
+auto-increment-offset = {{ auto_increment_offset }}
+auto-increment-increment = {{ auto_increment_increment }}
 
-slave_parallel_type = LOGICAL_CLOCK
-slave_parallel_workers = 10
-slave_preserve_commit_order = ON
-#slave_preserve_commit_order = OFF
-#skip-slave-start = 0
+slave_parallel_type = {{ slave_parallel_type }}
+slave_parallel_workers = {{ slave_parallel_workers }}
+slave_preserve_commit_order = {{ slave_preserve_commit_order }}
 
 skip-federated
-default_storage_engine = InnoDB
-table_open_cache = 4096
-log_bin_trust_function_creators = ON
+default_storage_engine = {{ default_storage_engine }}
+table_open_cache = {{ table_open_cache }}
+log_bin_trust_function_creators = {{ log_bin_trust_function_creators }}
 
-sql-mode = STRICT_ALL_TABLES
+sql-mode = {{ sql_mode }}
 
 {% endif %}
 {% endif %}
