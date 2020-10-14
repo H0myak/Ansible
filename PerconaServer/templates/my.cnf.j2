@@ -33,9 +33,6 @@ max_connect_errors = {{ max_connect_errors }}
 query_cache_type = {{ query_cache_type }}
 query_cache_size = {{ query_cache_size }}
 
-{% if innodb_buffer_pool_size is defined %}{{ innodb_buffer_pool_size }}M{% else %}{{ (ram_total / 4)|int }}M{% endif %}
-
-
 tmp_table_size = {% if tmp_table_size is defined %}{{ tmp_table_size }}M{% else %}{{ (ram_total / 32)|int }}M{% endif %}  #1/32 total ram, default 16M
 read_buffer_size = {{ read_buffer_size }}k # default 128k
 thread_cache_size = {{ thread_cache_size }} # The default value is based on the following formula, capped to a limit of 100:8 + (max_connections / 100)
