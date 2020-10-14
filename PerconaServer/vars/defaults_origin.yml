@@ -28,9 +28,9 @@
     set_fact: log_error_verbosity="3"
     when: log_error_verbosity is not defined
 
-  - name: Set fact character-set-server...
-    set_fact: character-set-server="utf8"
-    when: character-set-server is not defined
+  - name: Set fact character_set_server...
+    set_fact: character_set_server="utf8"
+    when: character_set_server is not defined
 
   - name: Set fact max_connections...
     set_fact: max_connections="100"
