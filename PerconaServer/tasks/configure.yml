@@ -7,7 +7,7 @@
 
 - name: Create a directory if it does not exist
   file:
-    path: /var/lib/mysql/data
+    path: "{{datadir}}"
     state: directory
     owner: mysql
     group: mysql
@@ -15,7 +15,7 @@
 
 - name: Create a directory if it does not exist
   file:
-    path: /var/lib/mysql/tmp
+    path: "{{tmpdir}}"
     owner: mysql
     group: mysql
     state: directory
