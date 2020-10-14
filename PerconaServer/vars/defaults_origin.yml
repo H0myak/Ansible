@@ -128,10 +128,6 @@
     set_fact: userstat="1"
     when: userstat is not defined
 
-  - name: Set fact log_bin_trust_function_creators...
-    set_fact: log_bin_trust_function_creators="0"
-    when: log_bin_trust_function_creators is not defined
-
   - name: Set fact use_gtid...
     set_fact: use_gtid="true"
     when: use_gtid is not defined
