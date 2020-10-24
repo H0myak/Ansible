@@ -1,0 +1,21 @@
+---
+- name: Start PerconaServer playbook...
+  hosts: consul_server
+
+  tasks:
+#    - name: Include defaults_origin vars...
+#       include: vars/defaults_origin.yml
+
+#    - name: Include PerconaServer vars...
+#      include_vars: vars/memory_table.yml
+
+    - name: Installing Consul...
+      include: tasks/install.yml
+
+#    - name: Runing PerconaServer config task...
+#      include: tasks/configure.yml
+
+#  handlers:
+#    - name: Reload afrer site change
+#      debug:
+#        var: hostvars[inventory_hostname]

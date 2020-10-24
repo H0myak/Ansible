@@ -1,0 +1,205 @@
+---
+
+  - name: Set fact datadir...
+    set_fact: datadir="/var/lib/mysql/data"
+    when: datadir is not defined
+
+  - name: Set fact tmpdir...
+    set_fact: tmpdir="/var/lib/mysql/tmp"
+    when: tmpdir is not defined
+
+  - name: Set fact socket...
+    set_fact: socket="/var/run/mysqld/mysqld.sock"
+    when: socket is not defined
+
+  - name: Set fact enable_slow_query_log...
+    set_fact: enable_slow_query_log="ON"
+    when: enable_slow_query_log is not defined
+
+  - name: Set fact long_query_time...
+    set_fact: long_query_time="1"
+    when: long_query_time is not defined
+
+  - name: Set fact log_slow_rate_limit...
+    set_fact: log_slow_rate_limit="100"
+    when: log_slow_rate_limit is not defined
+
+  - name: Set fact log_error_verbosity...
+    set_fact: log_error_verbosity="3"
+    when: log_error_verbosity is not defined
+
+  - name: Set fact character_set_server...
+    set_fact: character_set_server="utf8"
+    when: character_set_server is not defined
+
+  - name: Set fact max_connections...
+    set_fact: max_connections="100"
+    when: max_connections is not defined
+
+  - name: Set fact max_connect_errors...
+    set_fact: max_connect_errors="10000"
+    when: max_connect_errors is not defined
+
+  - name: Set fact query_cache_type...
+    set_fact: query_cache_type="0"
+    when: query_cache_type is not defined
+
+  - name: Set fact query_cache_size...
+    set_fact: query_cache_size="0"
+    when: query_cache_size is not defined
+
+  - name: Set fact read_buffer_size...
+    set_fact: read_buffer_size="128"
+    when: read_buffer_size is not defined
+
+  - name: Set fact thread_cache_size...
+    set_fact: thread_cache_size="10"
+    when: thread_cache_size is not defined
+
+  - name: Set fact max_seeks_for_key...
+    set_fact: max_seeks_for_key="1000"
+    when: max_seeks_for_key is not defined
+
+  - name: Set fact innodb_buffer_pool_instances...
+    set_fact: innodb_buffer_pool_instances="2"
+    when: innodb_buffer_pool_instances is not defined
+
+  - name: Set fact innodb_log_file_size...
+    set_fact: innodb_log_file_size="32"
+    when: innodb_log_file_size is not defined
+
+  - name: Set fact innodb_log_files_in_group...
+    set_fact: innodb_log_files_in_group="2"
+    when: innodb_log_files_in_group is not defined
+
+  - name: Set fact innodb_log_buffer_size...
+    set_fact: innodb_log_buffer_size="16"
+    when: innodb_log_buffer_size is not defined
+
+  - name: Set fact innodb_lock_wait_timeout...
+    set_fact: innodb_lock_wait_timeout="300"
+    when: innodb_lock_wait_timeout is not defined
+
+  - name: Set fact innodb_flush_log_at_trx_commit...
+    set_fact: innodb_flush_log_at_trx_commit="2"
+    when: innodb_flush_log_at_trx_commit is not defined
+
+  - name: Set fact innodb_flush_method...
+    set_fact: innodb_flush_method="O_DIRECT"
+    when: innodb_flush_method is not defined
+
+  - name: Set fact innodb_file_per_table...
+    set_fact: innodb_file_per_table="1"
+    when: innodb_file_per_table is not defined
+
+  - name: Set fact innodb_read_io_threads...
+    set_fact: innodb_read_io_threads="8"
+    when: innodb_read_io_threads is not defined
+
+  - name: Set fact innodb_write_io_threads...
+    set_fact: innodb_write_io_threads="8"
+    when: innodb_write_io_threads is not defined
+
+  - name: Set fact innodb_io_capacity...
+    set_fact: innodb_io_capacity="200"
+    when: innodb_io_capacity is not defined
+
+  - name: Set fact innodb_thread_concurrency...
+    set_fact: innodb_thread_concurrency="0"
+    when: innodb_thread_concurrency is not defined
+
+  - name: Set fact innodb_purge_threads...
+    set_fact: innodb_purge_threads="1"
+    when: innodb_purge_threads is not defined
+
+  - name: Set fact innodb_stats_on_metadata...
+    set_fact: innodb_stats_on_metadata="0"
+    when: innodb_stats_on_metadata is not defined
+
+  - name: Set fact innodb_buffer_pool_dump_at_shutdown...
+    set_fact: innodb_buffer_pool_dump_at_shutdown="ON"
+    when: innodb_buffer_pool_dump_at_shutdown is not defined
+
+  - name: Set fact innodb_buffer_pool_load_at_startup...
+    set_fact: innodb_buffer_pool_load_at_startup="ON"
+    when: innodb_buffer_pool_load_at_startup is not defined
+
+  - name: Set fact userstat...
+    set_fact: userstat="1"
+    when: userstat is not defined
+
+  - name: Set fact use_gtid...
+    set_fact: use_gtid="true"
+    when: use_gtid is not defined
+
+  - name: Set fact relay_log...
+    set_fact: relay_log="mysql-relay-bin"
+    when: relay_log is not defined
+
+  - name: Set fact relay_log_info_repository...
+    set_fact: relay_log_info_repository="TABLE"
+    when: relay_log_info_repository is not defined
+
+  - name: Set fact master_info_repository...
+    set_fact: master_info_repository="TABLE"
+    when: master_info_repository is not defined
+
+  - name: Set fact relay_log_recovery...
+    set_fact: relay_log_recovery="1"
+    when: relay_log_recovery is not defined
+
+  - name: Set fact binlog_format...
+    set_fact: binlog_format="ROW"
+    when: binlog_format is not defined
+
+  - name: Set fact log_bin...
+    set_fact: log_bin="master_bin_log"
+    when: log_bin is not defined
+
+  - name: Set fact expire_logs_days...
+    set_fact: expire_logs_days="1"
+    when: expire_logs_days is not defined
+
+  - name: Set fact max_binlog_files...
+    set_fact: max_binlog_files="0"
+    when: max_binlog_files is not defined
+
+  - name: Set fact sync_binlog...
+    set_fact: sync_binlog="0"
+    when: sync_binlog is not defined
+
+  - name: Set fact auto_increment_offset...
+    set_fact: auto_increment_offset="2"
+    when: auto_increment_offset is not defined
+
+  - name: Set fact auto_increment_increment...
+    set_fact: auto_increment_increment="2"
+    when: auto_increment_increment is not defined
+
+  - name: Set fact slave_parallel_type...
+    set_fact: slave_parallel_type="LOGICAL_CLOCK"
+    when: slave_parallel_type is not defined
+
+  - name: Set fact slave_parallel_workers...
+    set_fact: slave_parallel_workers="10"
+    when: slave_parallel_workers is not defined
+
+  - name: Set fact slave_preserve_commit_order...
+    set_fact: slave_preserve_commit_order="ON"
+    when: slave_preserve_commit_order is not defined
+
+  - name: Set fact default_storage_engine...
+    set_fact: default_storage_engine="InnoDB"
+    when: default_storage_engine is not defined
+
+  - name: Set fact table_open_cache...
+    set_fact: table_open_cache="4096"
+    when: table_open_cache is not defined
+
+  - name: Set fact log_bin_trust_function_creators...
+    set_fact: log_bin_trust_function_creators="ON"
+    when: log_bin_trust_function_creators is not defined
+
+  - name: Set fact sql_mode...
+    set_fact: sql_mode="STRICT_ALL_TABLES"
+    when: sql_mode is not defined
