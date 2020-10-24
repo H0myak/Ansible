@@ -12,8 +12,8 @@
     - name: Installing Consul...
       include: tasks/install.yml
 
-#    - name: Runing PerconaServer config task...
-#      include: tasks/configure.yml
+    - name: Runing PerconaServer config task...
+      include: tasks/configure.yml
 
 #  handlers:
 #    - name: Reload afrer site change
