@@ -1,8 +1,8 @@
 ---
 - name: Add consul server config to the server...
   template:
-    src: templates/server.conf.j2
-    dest: /etc/consul.d/server.conf
+    src: templates/server.json.j2
+    dest: /etc/consul.d/server.json
     backup: yes
 
 - name: Started consul...
