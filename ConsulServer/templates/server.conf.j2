@@ -1,0 +1,34 @@
+# Managed by ansible
+
+{
+    "advertise_addr": "0.0.0.0",
+    "bind_addr": "0.0.0.0",
+    "domain": "test",
+    "bootstrap_expect": 1,
+    "server": true,
+    "datacenter": "test_dc",
+    "data_dir": "/var/consul",
+    "encrypt": "password",
+    "dns_config": {
+        "allow_stale": true,
+        "max_stale": "15s"
+    },
+#    "retry_join": [
+#        "[LIST OF OTHER CONSUL SERVER IP's]",
+#        "[LIST OF OTHER CONSUL SERVER IP's]"
+#    ],
+    "retry_interval": "10s",
+    "retry_max": 100,
+    "skip_leave_on_interrupt": true,
+    "leave_on_terminate": false,
+    "ports": {
+        "dns": 53,
+        "http": 8080
+    },
+    "recursor": "8.8.8.8",
+    "rejoin_after_leave": true,
+    "addresses": {
+        "http": "0.0.0.0",
+        "dns": "0.0.0.0"
+    }
+}
