@@ -1,11 +1,11 @@
 ---
-- name: Add mysql config to the server...
+- name: Add consul server config to the server...
   template:
-    src: templates/consul_server.j2
-    dest: /etc/my.cnf
+    src: templates/server.conf.j2
+    dest: /etc/consul.d/server.conf
     backup: yes
 
-- name: Started mysql server
+- name: Started consul...
   service:
     name: mysql
     state: started
