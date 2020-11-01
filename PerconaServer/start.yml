@@ -25,7 +25,7 @@
       include: tasks/first_config.yml
 
     - name: Running create user task...
-      include tasks/create_user.yml
+      include: tasks/create_user.yml
 
 #  handlers:
 #    - name: Reload afrer site change
