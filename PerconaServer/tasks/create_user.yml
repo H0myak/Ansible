@@ -1,9 +1,8 @@
 ---
 - name: Create maxscale user...
   community.mysql.mysql_user:
-    login_host: 127.0.0.1
     login_user: jedi
-    login_password: DartVader
+    login_password: "DartVader"
     name: maxscale
     password: maxscale_passwd
     priv: '*.*:ALL'
