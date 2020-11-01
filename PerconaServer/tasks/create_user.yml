@@ -1,0 +1,29 @@
+---
+- name: Create maxscale user...
+  community.mysql.mysql_user:
+    name: maxscale
+    password: maxscale_passwd
+    priv: '*.*:ALL'
+    state: present
+
+- name: Create admin user...
+  community.mysql.mysql_user:
+    name: jedi
+    password: DartVaider
+    host: '%'
+    priv: '*.*:ALL,SUPER,GRANT'
+    state: present
+
+- name: Create replication user...
+  community.mysql.mysql_user:
+    name: repl
+    password: repl_passwd
+    host: '%'
+    priv: '*.*:REPLICATION SLAVE'
+    state: present
+
+- name: Create consul user...
+  community.mysql.mysql_user:
+    name: consul_check
+    password: consul_passwd
+    state: present
